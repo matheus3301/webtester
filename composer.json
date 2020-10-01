@@ -1,0 +1,13 @@
+{
+    "name": "matheus/webtester",
+    "description": "A web application wich executes tests on web applications",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "MAtheus Rocha",
+            "email": "monteiromatheus.rocha@gmail.com"
+        }
+    ],
+    "require": {}
+}
