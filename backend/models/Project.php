@@ -1,5 +1,6 @@
 <?php
 class Project {
+  private $id;
   private $name;
   private $description;
   private $image;
@@ -56,6 +57,24 @@ class Project {
    */
   public function setImage($image) {
     $this->image = $image;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of id
+   */
+  public function getId() {
+    return $this->id;
+  }
+
+  /**
+   * Set the value of id
+   *
+   * @return  self
+   */
+  public function setId($id) {
+    $this->id = $id;
 
     return $this;
   }

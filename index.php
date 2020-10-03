@@ -23,6 +23,39 @@
 </style>
 
 <body>
+    <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">New Project</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form onsubmit="handleSubmit(event)">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" name="name" id="name" placeholder="name of the project..." required>
+                        </div>
+                        <div class="form-group">
+                            <label for="image">Image</label>
+                            <input type="text" class="form-control" name="image" id="image" placeholder="image url">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea class="form-control" name="description" id="description" rows="3" required></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
         <div class="app-header header-shadow">
             <div class="app-header__logo">
@@ -99,7 +132,13 @@
                             <div class="main-card mb-3 card">
                                 <div class="card-header">Projects
                                     <div class="btn-actions-pane-right">
-                                        <button class="active btn btn-success">New Project</button>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">
+                                            New Project
+                                        </button>
+
+
+
                                     </div>
 
                                 </div>
@@ -202,10 +241,17 @@
                 </div>
 
             </div>
-            <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
         </div>
     </div>
     <script type="text/javascript" src="./assets/scripts/main.js"></script>
+
+    <script>
+        const handleSubmit = function(e) {
+            e.preventDefault();
+            console.log("creating the project...");
+
+        }
+    </script>
 </body>
 
 </html>
