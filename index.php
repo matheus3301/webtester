@@ -23,7 +23,7 @@
 </style>
 
 <body>
-    <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal fade" id="new-project-modal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -32,10 +32,10 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form onsubmit="handleSubmit(event)">
+                <form onsubmit="handleSubmit(event)" id="new-project-form">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="name">Name</label>
+                            <label for="name">Name *</label>
                             <input type="text" class="form-control" name="name" id="name" placeholder="name of the project..." required>
                         </div>
                         <div class="form-group">
@@ -43,9 +43,10 @@
                             <input type="text" class="form-control" name="image" id="image" placeholder="image url">
                         </div>
                         <div class="form-group">
-                            <label for="description">Description</label>
-                            <textarea class="form-control" name="description" id="description" rows="3" required></textarea>
+                            <label for="description">Description *</label>
+                            <textarea placeholder="a description of the project..." class="form-control" name="description" id="description" rows="3" required></textarea>
                         </div>
+                        <small>* : required field</small>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -133,7 +134,7 @@
                                 <div class="card-header">Projects
                                     <div class="btn-actions-pane-right">
                                         <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">
+                                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#new-project-modal">
                                             New Project
                                         </button>
 
@@ -244,11 +245,30 @@
         </div>
     </div>
     <script type="text/javascript" src="./assets/scripts/main.js"></script>
+    <script type="text/javascript" src="./assets/scripts/requisition.js"></script>
+
 
     <script>
         const handleSubmit = function(e) {
+            console.log(e);
             e.preventDefault();
             console.log("creating the project...");
+
+            apiFetch(
+                "project.php",
+                "POST",
+                new FormData(document.getElementById('new-project-form'))
+            ).then((response) => {
+
+                if ('error' in response) {
+                    alert("Something went wrong: " + response.error);
+                } else {
+                    document.getElementById('new-project-form').reset();
+                    $("#new-project-modal").modal('hide');
+                }
+
+            });
+
 
         }
     </script>
