@@ -10,7 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="msapplication-tap-highlight" content="no">
 
+    <link href="./assets/css/bootstrap.css" rel="stylesheet">
     <link href="./main.css" rel="stylesheet">
+
 </head>
 
 <style>
@@ -23,6 +25,9 @@
 </style>
 
 <body>
+
+
+
     <div class="modal fade" id="new-project-modal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -32,8 +37,10 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form onsubmit="handleSubmit(event)" id="new-project-form">
+                <form onsubmit="submitForm(event,'submit-response','#new-project-modal')" id="new-project-form" action="backend/api/project.php" method="POST">
                     <div class="modal-body">
+                        <div id="submit-response">
+                        </div>
                         <div class="form-group">
                             <label for="name">Name *</label>
                             <input type="text" class="form-control" name="name" id="name" placeholder="name of the project..." required>
@@ -244,34 +251,10 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="./assets/scripts/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="./assets/scripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="./assets/scripts/main.js"></script>
     <script type="text/javascript" src="./assets/scripts/requisition.js"></script>
-
-
-    <script>
-        const handleSubmit = function(e) {
-            console.log(e);
-            e.preventDefault();
-            console.log("creating the project...");
-
-            apiFetch(
-                "project.php",
-                "POST",
-                new FormData(document.getElementById('new-project-form'))
-            ).then((response) => {
-
-                if ('error' in response) {
-                    alert("Something went wrong: " + response.error);
-                } else {
-                    document.getElementById('new-project-form').reset();
-                    $("#new-project-modal").modal('hide');
-                }
-
-            });
-
-
-        }
-    </script>
 </body>
 
 </html>

@@ -19,7 +19,7 @@ if ($method == "GET") {
   }
   $project->setName(trim($input['name']));
 
-  if (!isset($input['description']) || trim($input['name']) == "") {
+  if (!isset($input['description']) || trim($input['description']) == "") {
     http_response_code(400);
     die(json_encode(array('error' => 'missing description')));
   }
